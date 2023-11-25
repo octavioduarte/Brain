@@ -1,7 +1,7 @@
 import { ProducerDB, ProducerModel } from "@/domain/models";
 
 export interface AddProducer {
-    add: (params: AddProducer.Param) => Promise<AddProducer.Result>
+    add: (param: AddProducer.Param) => Promise<AddProducer.Result>
 }
 
 export namespace AddProducer {
