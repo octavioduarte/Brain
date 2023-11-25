@@ -1,6 +1,5 @@
+import { AddUserRepository } from "@/data/protocols";
 import { AddProducer } from "@/domain/usecases/producer";
-import { AddUserRepository } from "@/data/protocols/producer";
-
 export class AddProducerUseCase implements AddProducer {
    constructor (
        private readonly addProducerRepository: AddUserRepository
