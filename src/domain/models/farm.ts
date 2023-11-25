@@ -7,9 +7,9 @@ export type FarmDB = {
   area: number;
   arable_area: number;
   vegetation_area: number;
-  culture: CultureDB;
+  culture: CultureDB[];
 };
 
 export type FarmModel = Omit<FarmDB, "id" | "user_id" | "culture"> & {
-  culture: CultureModel
+  culture: CultureModel[]
 };
