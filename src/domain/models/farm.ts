@@ -1,6 +1,8 @@
 import { Culture } from "./culture";
 
 export type Farm = {
+  user_id: number
+  id: number
   name: string;
   area: number;
   arable_area: number;
