@@ -15,5 +15,5 @@ export type ProducerModel = Omit<
   ProducerDB,
   "id" | "farm" | "active" | "created_at" | "updated_at"
 > & {
-  farm: FarmModel;
+  farm: FarmModel[];
 };
