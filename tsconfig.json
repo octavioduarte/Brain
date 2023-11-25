@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "target": "ES2020",
+        "strictNullChecks": true,
+        "esModuleInterop": true,
+        "inlineSourceMap": true,
+        "resolveJsonModule": true,
+        "noImplicitAny": false,
+        "skipLibCheck": true,
+        "rootDir": "src",
+        "baseUrl": "src",
+        "paths": {
+            "@/*": ["*"]
+        }
+    },
+    "include": ["src"]
+}
