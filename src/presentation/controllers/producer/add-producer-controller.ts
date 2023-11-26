@@ -1,6 +1,7 @@
+import { DuplicateDocumentError } from "@/domain/errors";
 import { ProducerModel } from "@/domain/models";
 import { AddProducer } from "@/domain/usecases/producer";
-import { created, serverError } from "@/presentation/helpers";
+import { badRequest, created, serverError } from "@/presentation/helpers";
 import { Controller, HttpResponse, Validation } from "@/presentation/protocols";
 
 export class AddProducerController implements Controller {
@@ -8,13 +9,14 @@ export class AddProducerController implements Controller {
     private readonly addProducer: AddProducer
   ) {}
 
-  async handle(
-    requestParams: AddProducerController.Param
-  ): Promise<HttpResponse> {
+  async handle(requestParams: AddProducerController.Param): Promise<HttpResponse> {
     try {
       const result = await this.addProducer.add(requestParams);
       return created(result);
     } catch (error) {
+      if (error instanceof DuplicateDocumentError) {
+        return badRequest(error)
+      }
       return serverError(error);
     }
   }

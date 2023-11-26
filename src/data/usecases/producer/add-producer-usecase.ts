@@ -3,16 +3,25 @@ import {
   AddCultureFarmRepository,
   AddFarmRepository,
   AddUserRepository,
+  LoadProducerByDocumentRepository,
 } from "@/data/protocols";
 import { CultureModel, ProducerModel } from "@/domain/models";
+import { DuplicateDocumentError } from "@/domain/errors";
 export class AddProducerUseCase implements AddProducer {
   constructor(
     private readonly addProducerRepository: AddUserRepository,
+    private readonly loadProducerByDocumentRepository: LoadProducerByDocumentRepository,
     private readonly addFarmRepository: AddFarmRepository,
     private readonly addCultureFarmRepository: AddCultureFarmRepository
   ) {}
 
   async add(params: AddProducer.Param): Promise<AddProducer.Result> {
+    const producerDB = await this.loadProducerByDocumentRepository.loadByDocument(params.document)
+
+    if (producerDB) {
+      throw new DuplicateDocumentError(params.document)
+    }
+
     const producerID = await this.saveProducerOnDB(params).then(
       async (producerID: number) => {
         await this.saveFarmOnDB(params, producerID);
