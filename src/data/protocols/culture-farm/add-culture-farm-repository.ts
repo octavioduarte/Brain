@@ -1,5 +1,5 @@
 export interface AddCultureFarmRepository {
-  save: (param: AddCultureFarmRepository.Param) => Promise<AddCultureFarmRepository.Result>;
+  save: (params: AddCultureFarmRepository.Param) => Promise<AddCultureFarmRepository.Result>;
 }
 export namespace AddCultureFarmRepository {
   export type Param = {

@@ -1,5 +1,5 @@
 export interface AddUserRepository {
-  save: (param: AddUserRepository.Param) => Promise<AddUserRepository.Result>;
+  save: (params: AddUserRepository.Param) => Promise<AddUserRepository.Result>;
 }
 export namespace AddUserRepository {
   export type Param = {
