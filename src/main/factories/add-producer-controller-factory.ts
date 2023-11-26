@@ -7,8 +7,9 @@ import {
   FarmRepository,
 } from "@/infra/db";
 import { AddProducerController } from "@/presentation/controllers/producer/add-producer-controller";
-import { AddProducerValidateAdapter } from "@/data/usecases/validations/add-producer-validate";
+import { AddProducerValidateUseCase } from "@/data/usecases/validations/add-producer-validate";
 import { AddProducerValidator } from "@/infra/validator/producer";
+import { CpfValidator } from "@/presentation/helpers/validators";
 
 export const makeAddProducerController = (): Controller => {
   const producerRepository = new ProducerRepository(new PrismaClient());
@@ -23,6 +24,6 @@ export const makeAddProducerController = (): Controller => {
 
   return new AddProducerController(
     addProducerUseCase,
-    new AddProducerValidateAdapter(new AddProducerValidator())
+    new AddProducerValidateUseCase(new AddProducerValidator(), new CpfValidator())
   );
 };
