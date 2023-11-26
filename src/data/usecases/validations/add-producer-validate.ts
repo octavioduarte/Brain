@@ -1,11 +1,13 @@
 import { Validator } from "@/data/protocols";
 import { ProducerModel } from "@/domain/models";
 import { ValidatorSchema } from "@/domain/usecases";
+import { DocumentType } from "@/utils";
 
 export class AddProducerValidateUseCase implements ValidatorSchema {
   constructor(
     private readonly addProducerValidator: Validator,
-    private readonly cpfValidator: Validator
+    private readonly cpfValidator: Validator,
+    private readonly cnpjValidator: Validator
   ) {}
 
   isValid(fields: ProducerModel): string | undefined {
@@ -17,7 +19,9 @@ export class AddProducerValidateUseCase implements ValidatorSchema {
 
   pipeValidators(fields: ProducerModel): {validatorHandle: Validator, fieldValidate: unknown}[] {
     return   [
-      { validatorHandle: this.cpfValidator, fieldValidate: fields.document },
+      { 
+        validatorHandle: fields.document_type === DocumentType.CPF ?  this.cpfValidator : this.cnpjValidator,
+        fieldValidate: fields.document },
       { validatorHandle: this.addProducerValidator, fieldValidate: fields }
     ];
   }

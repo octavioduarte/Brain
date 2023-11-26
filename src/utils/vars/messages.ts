@@ -1,3 +1,3 @@
 export enum MessagesErrorEnum {
-  INVALID_CPF = "Document is invalid.",
+  INVALID_DOCUMENT = "Document is invalid.",
 }

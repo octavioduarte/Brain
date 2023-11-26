@@ -1,11 +1,12 @@
 import { Validator } from "@/data/protocols";
-import { isValidCPF, MessagesErrorEnum } from "@/utils";
+import { MessagesErrorEnum } from "@/utils";
+import { isValidCNPJ } from "@/utils/functions/is-valid-cnpj";
 
-export class CpfValidator implements Validator {
+export class CnpjValidator implements Validator {
   private messageError = MessagesErrorEnum.INVALID_DOCUMENT;
 
   validate(document: string): string | undefined {
-    const isValid = isValidCPF(document);
+    const isValid = isValidCNPJ(document);
     if (!isValid) return this.messageError;
   }
 }
