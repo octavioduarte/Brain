@@ -26,8 +26,7 @@ export type FarmModel = Omit<
   | "state_uf_id"
   | "city"
   | "state_uf"
-  | "vegetation_area"
 > & {
-  culture: CultureModel[];
+  cultures: CultureModel[];
   zip_code: string;
 };

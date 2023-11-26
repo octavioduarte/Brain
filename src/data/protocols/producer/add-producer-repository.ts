@@ -1,10 +1,11 @@
-import { ProducerDB, ProducerModel } from "@/domain/models";
-
 export interface AddUserRepository {
   save: (param: AddUserRepository.Param) => Promise<AddUserRepository.Result>;
 }
-
 export namespace AddUserRepository {
-  export type Param = ProducerModel;
-  export type Result = ProducerDB;
+  export type Param = {
+    document: string
+    document_type: string
+    name: string
+  };
+  export type Result = number;
 }

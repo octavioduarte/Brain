@@ -6,5 +6,5 @@ export interface AddProducer {
 
 export namespace AddProducer {
     export type Param = ProducerModel
-    export type Result = ProducerDB
+    export type Result = number
 }
