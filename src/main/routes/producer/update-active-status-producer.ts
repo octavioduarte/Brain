@@ -4,5 +4,5 @@ import { makeUpdateActiveStatusProducerController } from "@/main/factories";
 
 
 export default (router: Router): void => {
-    router.put('/producer', adaptRoute(makeUpdateActiveStatusProducerController()))
+    router.patch('/producer', adaptRoute(makeUpdateActiveStatusProducerController()))
 }
