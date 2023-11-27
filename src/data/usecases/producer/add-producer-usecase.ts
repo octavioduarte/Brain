@@ -24,13 +24,10 @@ export class AddProducerUseCase implements AddProducer {
       throw new DuplicateDocumentError(params.document)
     }
 
-    const producerID = await this.saveProducerOnDB(params).then(
-      async (producerID: number) => {
-        await this.saveFarmOnDB(params, producerID);
-      }
-    );
+    const producerID = await this.saveProducerOnDB(params) 
+    await this.saveFarmOnDB(params, producerID);
 
-    return Number(producerID);
+    return { id: producerID, ...params}
   }
 
   private async saveProducerOnDB(params: ProducerModel): Promise<number> {
