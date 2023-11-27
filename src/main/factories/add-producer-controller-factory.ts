@@ -9,7 +9,7 @@ import {
 import { AddProducerController } from "@/presentation/controllers/producer/add-producer-controller";
 import { AddProducerValidateUseCase } from "@/data/usecases/validations/add-producer-validate";
 import { AddProducerValidator } from "@/infra/validator/producer";
-import { CnpjValidator, CpfValidator } from "@/presentation/helpers/validators";
+import { CnpjValidator, CpfValidator, CalcSizeAreaValidator } from "@/presentation/helpers/validators";
 
 export const makeAddProducerController = (): Controller => {
   const producerRepository = new ProducerRepository(new PrismaClient());
@@ -24,6 +24,11 @@ export const makeAddProducerController = (): Controller => {
 
   return new AddProducerController(
     addProducerUseCase,
-    new AddProducerValidateUseCase(new AddProducerValidator(), new CpfValidator(), new CnpjValidator())
+    new AddProducerValidateUseCase(
+      new AddProducerValidator(),
+      new CpfValidator(),
+      new CnpjValidator(),
+      new CalcSizeAreaValidator()
+    )
   );
 };
