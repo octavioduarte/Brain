@@ -11,7 +11,7 @@ const importRoutes = (app: Express, prefix?: string, router?: Router): Router =>
     if (stats.isDirectory()) {
       importRoutes(app, newPrefix, expressRouter)
     }
-    if (stats.isFile() && !file.includes('.test.')) {
+    if (stats.isFile()) {
       const routeFile = await import(newPrefix ?? path.join('../routes/', file))
       routeFile.default(expressRouter)
     }

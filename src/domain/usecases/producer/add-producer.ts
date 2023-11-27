@@ -1,5 +1,4 @@
 import { FarmModel, ProducerModel } from "@/domain/models";
-
 export interface AddProducer {
   add: (params: AddProducer.Param) => Promise<AddProducer.Result>;
 }

@@ -3,11 +3,13 @@ import { Controller } from "@/presentation/protocols";
 
 export const adaptRoute = (controller: Controller): RequestHandler => {
   return async (req: Request, res: Response) => {
-    const { body } = req;
+    const { body, query } = req;
     const request = {
-      ...{ body: body || {} },
+      ...query,
+      ...body,
     };
-    const httpResponse = await controller.handle({...request.body});
+
+    const httpResponse = await controller.handle({ ...request });
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
       res.status(httpResponse.statusCode).json(httpResponse.body);
     } else {

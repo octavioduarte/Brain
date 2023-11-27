@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { ProducerDB } from "@/domain/models";
-import { AddUserRepository, LoadProducerByDocumentRepository } from "@/data/protocols";
-
-export class ProducerRepository implements AddUserRepository , LoadProducerByDocumentRepository {
+import { AddUserRepository, UpdateActiveStatusProducerRepository, LoadProducerByDocumentRepository } from "@/data/protocols";
+export class ProducerRepository implements AddUserRepository , LoadProducerByDocumentRepository, UpdateActiveStatusProducerRepository {
   constructor(private readonly prismaClient: PrismaClient) {}
   
   async save(params: AddUserRepository.Param): Promise<AddUserRepository.Result> {
@@ -13,5 +11,9 @@ export class ProducerRepository implements AddUserRepository , LoadProducerByDoc
   async loadByDocument(documentNumber: string): Promise<LoadProducerByDocumentRepository.Result> {
     const producer = await this.prismaClient.producer.findUnique({ where: { document: documentNumber}})
     return producer;
+  }
+
+  async updateActiveStatusProducer(documentNumber: UpdateActiveStatusProducerRepository.ParamDocument, newStatus: UpdateActiveStatusProducerRepository.ParamNewStatus){
+    return await this.prismaClient.producer.update({ where: { document: documentNumber },  data: { active: newStatus }})
   }
 }

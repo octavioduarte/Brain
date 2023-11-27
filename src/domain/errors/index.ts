@@ -1,4 +1,5 @@
 export * from './duplicate'
+export * from './not-found'
 export * from './server-error'
 export * from './schema-error'
 export * from './zip-code-remote-error'
