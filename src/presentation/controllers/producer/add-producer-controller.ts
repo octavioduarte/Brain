@@ -2,7 +2,7 @@ import { ProducerModel } from "@/domain/models";
 import { ValidatorSchema } from "@/domain/usecases";
 import { AddProducer } from "@/domain/usecases/producer";
 import { Controller, HttpResponse } from "@/presentation/protocols";
-import { DuplicateDocumentError, SchemaError } from "@/domain/errors";
+import { DuplicateDocumentError, SchemaError, ZipCodeError } from "@/domain/errors";
 import { badRequest, created, serverError } from "@/presentation/helpers";
 export class AddProducerController implements Controller {
   constructor(
@@ -19,7 +19,7 @@ export class AddProducerController implements Controller {
       const result = await this.addProducer.add(requestParams);
       return created(result);
     } catch (error) {
-      if (error instanceof DuplicateDocumentError) {
+      if (error instanceof DuplicateDocumentError || error instanceof ZipCodeError) {
         return badRequest(error)
       }
       return serverError(error);

@@ -1,7 +1,6 @@
 import joi from "joi";
 import { DocumentType } from "@/utils";
 import { Validator } from "@/data/protocols";
-
 export class AddProducerValidator implements Validator {
   private schema = joi.object({
     name: joi.string().required(),

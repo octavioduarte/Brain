@@ -16,17 +16,20 @@ import {
   CalcSizeAreaValidator,
   CheckMatchBetweenCultureFarmAndCulturesDBValidator,
 } from "@/presentation/helpers/validators";
+import { LoadAddressByZipCode } from "@/infra/remote";
 
 export const makeAddProducerController = (): Controller => {
   const producerRepository = new ProducerRepository(new PrismaClient());
   const farmRepository = new FarmRepository(new PrismaClient());
   const cultureFarmRepository = new CultureFarmRepository(new PrismaClient());
   const cultureRepository = new CultureRepository(new PrismaClient());
+  const loadAddressByZipCode = new LoadAddressByZipCode()
   const addProducerUseCase = new AddProducerUseCase(
     producerRepository,
     producerRepository,
     farmRepository,
     cultureFarmRepository,
+    loadAddressByZipCode
   );
 
   return new AddProducerController(

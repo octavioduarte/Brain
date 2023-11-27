@@ -3,17 +3,18 @@ import {
   AddCultureFarmRepository,
   AddFarmRepository,
   AddUserRepository,
-  LoadAllCulturesRepository,
   LoadProducerByDocumentRepository,
 } from "@/data/protocols";
 import { CultureModel, ProducerModel } from "@/domain/models";
 import { DuplicateDocumentError } from "@/domain/errors";
+import { LoadAddressByZipCode } from "@/infra/remote";
 export class AddProducerUseCase implements AddProducer {
   constructor(
     private readonly addProducerRepository: AddUserRepository,
     private readonly loadProducerByDocumentRepository: LoadProducerByDocumentRepository,
     private readonly addFarmRepository: AddFarmRepository,
     private readonly addCultureFarmRepository: AddCultureFarmRepository,
+    private readonly loadAddressByZipCode: LoadAddressByZipCode
   ) {}
 
   async add(params: AddProducer.Param): Promise<AddProducer.Result> {
@@ -71,12 +72,8 @@ export class AddProducerUseCase implements AddProducer {
     }
   }
 
-  private async loadAddress(
-    _zipCode: string
-  ): Promise<{ city: string; state: string }> {
-    return {
-      city: "São Paulo",
-      state: "SP",
-    };
+  private async loadAddress(zipCode: string): Promise<{ city: string; state: string }> {
+    const { localidade, uf } = await this.loadAddressByZipCode.loadAddress(zipCode)
+    return { city: localidade, state: uf }
   }
 }
