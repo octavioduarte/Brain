@@ -3,6 +3,7 @@ import {
   AddCultureFarmRepository,
   AddFarmRepository,
   AddUserRepository,
+  LoadAllCulturesRepository,
   LoadProducerByDocumentRepository,
 } from "@/data/protocols";
 import { CultureModel, ProducerModel } from "@/domain/models";
@@ -12,7 +13,7 @@ export class AddProducerUseCase implements AddProducer {
     private readonly addProducerRepository: AddUserRepository,
     private readonly loadProducerByDocumentRepository: LoadProducerByDocumentRepository,
     private readonly addFarmRepository: AddFarmRepository,
-    private readonly addCultureFarmRepository: AddCultureFarmRepository
+    private readonly addCultureFarmRepository: AddCultureFarmRepository,
   ) {}
 
   async add(params: AddProducer.Param): Promise<AddProducer.Result> {

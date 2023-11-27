@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { AddCultureFarmRepository } from "@/data/protocols";
-
 export class CultureFarmRepository implements AddCultureFarmRepository {
   constructor(private readonly prismaClient: PrismaClient) {}
 

@@ -1,3 +1,3 @@
 export interface ValidatorSchema {
-  isValid: (fields: unknown) => string | undefined;
+  isValid: (fields: unknown) => Promise<string | undefined>;
 }

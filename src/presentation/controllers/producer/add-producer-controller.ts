@@ -12,7 +12,7 @@ export class AddProducerController implements Controller {
 
   async handle(requestParams: AddProducerController.Param): Promise<HttpResponse> {
     try {
-      const schemaErrors = this.addProducerValidateAdapter.isValid(requestParams)
+      const schemaErrors = await this.addProducerValidateAdapter.isValid(requestParams)
 
       if (schemaErrors) return badRequest(new SchemaError(schemaErrors))
 
