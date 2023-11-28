@@ -1,3 +1,78 @@
+Executando o projeto: 
+
+1º Primeiramente instale as dependêncis com: 
+
+~~~bash
+ npm i
+~~~
+
+2º Adicione o arquivo .env, com a variável `DATABASE_URL`.
+
+
+3º Para startar a API rode o comando: 
+
+~~~bash
+ npm run dev
+~~~
+
+
+Abaixo estão alguns curls que você pode executar, ou se preferir copiar e colar o conteúdo do arquivo `Insomnia_2023-11-28.json` no [Insomnia](https://insomnia.rest/download).
+
+# Para cadastrar um novo produtor
+~~~curl
+curl --request POST \
+  --url http://localhost:3000/brain/producer \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/8.4.5' \
+  --data '{
+	"name": "Usuário 2",
+	"document": "09292678000",
+	"document_type": "CPF",
+	"farm": [
+			{
+			"name": "Fazenda Paraiba",
+			"zip_code": "64027660",
+			"area": 2500,
+			"arable_area": 1000,
+			"vegetation_area": 500,
+			"cultures": [
+				{
+					"id": 10,
+					"occupation_area": 500
+				}
+			]
+		}
+	]
+}'
+~~~
+
+
+# Para ativar ou inativar um produtor (exclusão lógica)
+
+~~~curl
+curl --request PATCH \
+  --url http://localhost:3000/brain/producer \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/8.4.5' \
+  --data '{
+	"document": "09292678000",
+	"document_type": "CPF",
+	"new_status": false
+}'
+~~~
+
+
+# Para carregar as métricas
+
+~~~curl 
+curl --request GET \
+  --url http://localhost:3000/brain/metrics \
+  --header 'User-Agent: insomnia/8.4.5'
+~~~
+
+
+<hr/>
+
 Rotas da aplicação: 
 
 Método: `POST` <br/>
