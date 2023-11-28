@@ -2,7 +2,7 @@
   "name": "brain",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "dev": "nodemon"
@@ -11,7 +11,7 @@
     "@": "dist"
   },
   "keywords": [],
-  "author": "",
+  "author": "https://github.com/octavioduarte",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.17",
