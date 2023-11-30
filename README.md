@@ -6,14 +6,40 @@ Executando o projeto:
  npm i
 ~~~
 
-2º Adicione o arquivo .env, com a variável `DATABASE_URL`.
+2º Crie o o arquivo .env, com a variável `DATABASE_URL` com a string de conexão.
 
 
-3º Para startar a API rode o comando: 
+3º Caso não tenha o [Nodemon](https://nodemon.io/) instalado, execute o comando (se já tiver o pacote instalado, pule para o passo 4) : 
 
 ~~~bash
- npm run dev
+  npm install -g nodemon
+
+  #Esta função instala um pacote a nível global em sua máquina então precisa ser executada
+#com o acesso de um administrador, usando sudo no linux ou executando o terminal como administrador no Windows
 ~~~
+
+4º Faça o build do projeto com o comando:
+
+~~~bash
+  npm run build
+~~~
+
+5º Para que o ORM ([prisma](https://www.prisma.io/)) faça a conexão inicial com o banco é necessário executar: 
+
+~~~bash
+  npx prisma generate
+~~~
+
+6º Por último para startar o projeto na porta 3000, execute o comando
+
+~~~bash
+  npm run dev
+~~~
+
+
+Se tudo der certo você vai receber uma mensagem do [Nodemon](https://nodemon.io/) informando que o servidor está sendo executado, após isso você pode testar os endpoints.
+
+
 
 
 Abaixo estão alguns curls que você pode executar, ou se preferir copiar e colar o conteúdo do arquivo `Insomnia_2023-11-28.json` no [Insomnia](https://insomnia.rest/download).
